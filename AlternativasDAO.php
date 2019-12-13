@@ -15,16 +15,20 @@ class AlternativasDAO{
 	public function apagar($id, $idQuestao){
 		$sql = "DELETE FROM alternativas WHERE idAlternativa=$id";
 		$rs = $this->con->query($sql);
-		if ($rs) header("Location: \alternativas?questao=$idQuestao");
+		session_start();
+		if ($rs) {
+			$_SESSION["success"]= "alternativa apagada";
+			header("Location: \alternativas?questao=$idQuestao");}
 		else echo $this->con->error;
 	}
 
 	public function inserir(){
 		$sql = "INSERT INTO alternativas VALUES (0, $this->idQuestao, '$this->texto', '$this->correta')";
 		$rs = $this->con->query($sql);
-
-		if ($rs) 
-			header("Location: \alternativas?questao=$this->idQuestao");
+		session_start();
+		if ($rs) {
+			$_SESSION["success"]= "alternativa inserida";
+			header("Location: \alternativas?questao=$this->idQuestao");}
 		else 
 			echo $this->con->error;
 	}
@@ -32,8 +36,10 @@ class AlternativasDAO{
 	public function editar(){
 		$sql = "UPDATE alternativas SET texto='$this->texto', correta='$this->correta' WHERE idAlternativa=$this->id";
 		$rs = $this->con->query($sql);
-		if ($rs) 
-			header("Location: \alternativas?questao=$id");
+		session_start();
+		if ($rs) {
+			$_SESSION["success"]= "alternativa editada";
+			header("Location: \alternativas?questao=$id");}
 		else 
 			echo $this->con->error;
 	}

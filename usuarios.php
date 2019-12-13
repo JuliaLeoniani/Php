@@ -1,6 +1,7 @@
 <?php 
 include "UsuarioDAO.php"; 
 include "alerta.php";
+include "logado.php";
 
 $usuarioDAO = new UsuarioDAO();
 $lista = $usuarioDAO->buscar();
@@ -8,9 +9,16 @@ $lista = $usuarioDAO->buscar();
 include "cabecalho.php";
 include "menu.php";
 ?>
-<?php mostrarAlerta('success');?>
-<?php mostrarAlerta('danger');?>
+
 			<div class="col-10">
+			<?php mostrarAlerta("success");?>
+			<div class='success success-tipo'>
+        	</div>
+			<?php mostrarAlerta('danger');?>
+
+			<?php mostrarLogado("logado");?>
+			<div class='success success-tipo'>
+        	</div>
 				<h3>Usuários</h3>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#modalnovo">
 					<i class="fas fa-user-plus"></i>

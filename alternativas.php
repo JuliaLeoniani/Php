@@ -1,5 +1,4 @@
 <?php 
-include "alerta.php";
 include "AlternativasDAO.php";
 include "QuestoesDAO.php";
 
@@ -12,10 +11,14 @@ $lista = $alternativas->buscar();
 $questoes = new QuestoesDAO();
 $questoes->id = $idQuestao;
 $questoes->buscarPorId();
-
+include "alerta.php";
 include "cabecalho.php";
 include "menu.php";
+
 ?>
+
+<?php mostrarAlerta("success");?>
+			<?php mostrarAlerta('danger');?>
 <div class="container">
 	
 	<h2><?= $questoes->enunciado ?></h2>

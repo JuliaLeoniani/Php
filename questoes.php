@@ -6,8 +6,11 @@ $lista = $questoesDAO->buscar();
 
 include "cabecalho.php";
 include "menu.php";
+include "alerta.php";
 ?>
-			<div class="col-10">	
+			<div class="col-10">
+			<?php mostrarAlerta("success");?>
+			<?php mostrarAlerta('danger');?>	
 				<h3>Questões</h3>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#modalnovo">
 					<i class="fas fa-question"></i>
@@ -66,8 +69,8 @@ include "menu.php";
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">Salvar</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 				</div>
 				</form>
 			</div>

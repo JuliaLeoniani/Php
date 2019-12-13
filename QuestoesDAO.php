@@ -14,16 +14,22 @@ class QuestoesDAO{
 	public function apagar($id){
 		$sql = "DELETE FROM questoes WHERE idQuestao=$id";
 		$rs = $this->con->query($sql);
-		if ($rs) header("Location: \questoes");
+		session_start();
+		if ($rs) {
+			$_SESSION["success"]= "questão apagada";
+			header("Location: \questoes");
+		}
 		else echo $this->con->error;
 	}
 
 	public function inserir(){
 		$sql = "INSERT INTO questoes VALUES (0, '$this->enunciado', '$this->tipo')";
 		$rs = $this->con->query($sql);
-
-		if ($rs) 
+		session_start();
+		if ($rs){
+			$_SESSION["success"]= "questão inserida"; 
 			header("Location: \questoes");
+		}
 		else 
 			echo $this->con->error;
 	}
@@ -31,8 +37,11 @@ class QuestoesDAO{
 	public function editar(){
 		$sql = "UPDATE questoes SET enunciado='$this->enunciado', tipo='$this->tipo' WHERE idQuestao=$this->id";
 		$rs = $this->con->query($sql);
-		if ($rs) 
+		session_start();
+		if ($rs){
+			$_SESSION["success"]= "questão editada"; 
 			header("Location: \questoes");
+		}
 		else 
 			echo $this->con->error;
 	}
@@ -43,8 +52,7 @@ class QuestoesDAO{
 		$rs = $this->con->query($sql);
 		$lista = array();
 		while ($linha = $rs->fetch_object()){
-			$lista[] = $linha;
-		}
+			$lista[] = $linha;}
 		return $lista;
 	}
 

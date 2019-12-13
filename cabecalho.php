@@ -11,9 +11,7 @@
 
 		<div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
-				</li>
+				
 			</ul>
 			<div class="my-2 my-lg-0">
 				<a class="btn btn-primary" href="UsuariosController.php?acao=sair" role="button">sair</a>

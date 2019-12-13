@@ -9,7 +9,7 @@ class UsuarioDAO{
 	private $con;
 
 	function __construct(){
-		$this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+	$this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 	}
 
 	public function apagar($id){
@@ -21,15 +21,19 @@ class UsuarioDAO{
 		}
 		else{	$_SESSION["danger"]= "usuario nao foi apagado";
 				}
-	header("Location: /usuarios");
+		header("Location: /usuarios");
 	}
+
 
 	public function inserir(){
 		$sql = "INSERT INTO usuarios VALUES (0, '$this->nome', '$this->email', md5('$this->senha') )";
 		$rs = $this->con->query($sql);
-
-		if ($rs) 
+		session_start();
+		if ($rs){	
+			$_SESSION["success"]= "usuario inserido";
 			header("Location: /usuarios");
+
+		}
 		else 
 			echo $this->con->error;
 	}
@@ -37,8 +41,11 @@ class UsuarioDAO{
 	public function editar(){
 		$sql = "UPDATE usuarios SET nome='$this->nome', email='$this->email' WHERE idUsuario=$this->id";
 		$rs = $this->con->query($sql);
-		if ($rs) 
+		session_start();
+		if ($rs){
+			$_SESSION["success"]= "usuario editado"; 
 			header("Location: /usuarios");
+		}
 		else 
 			echo $this->con->error;
 	}
@@ -46,7 +53,11 @@ class UsuarioDAO{
 	public function trocarSenha($id, $senha){
 		$sql = "UPDATE usuarios SET senha=md5('$senha') WHERE idUsuario=$id";
 		$rs = $this->con->query($sql);
-		if ($rs) header("Location: /usuarios");
+		session_start();
+		if ($rs) {
+			$_SESSION["success"]= "senha alterada";
+			header("Location: /usuarios");
+		}
 		else echo $this->con->error;
 	}
 
@@ -64,9 +75,9 @@ class UsuarioDAO{
 		$sql = "SELECT * FROM usuarios WHERE email='$this->email' AND senha=md5('$this->senha')";
 		$rs = $this->con->query($sql);
 		//echo $sql;
+		session_start();
 		if ($rs->num_rows > 0) {
-			session_start();
-			$_SESSION["logado"]=true;
+			$_SESSION["logado"]="Logado com sucesso!";
 			header("Location: /usuarios");
 		}else{
 			header("Location: /?erro=1");
